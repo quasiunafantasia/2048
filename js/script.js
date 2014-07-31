@@ -1,4 +1,8 @@
-var COLLS = 4, RAWS = 4; 
+"use strict";
+var COLLS = 4, 
+RAWS = 4,
+LEFT_EDGE=0,
+RIGHT_EDGE=3;
 // [i][j] : i=0..RAWS, j = 0..COLLS
 function Cell(val) {
 	if (val !== undefined)
@@ -99,8 +103,40 @@ Field.prototype.display = function(){
 	for(var i =0; i < COLLS; i++){
 		str="";
 		for (var j =0; j<RAWS; j++)
-			console.log(this.cells[i][j].value);
-		console.log();
+			str+=this.cells[i][j].value+" ";
+		console.log(str);
 	}
 }
 f.setLinks();
+Field.prototype.moveLeft=function (){
+	var i,
+	iterator;
+	for ( i=0; i < RAWS; i++) {
+		iterator=this.cells[i][LEFT_EDGE];
+		while(iterator.nextRight){
+			if ( iterator.value === iterator.nextRight.value){
+				iterator.value*=2;
+				iterator.nextRight.value=0;				
+			}
+			iterator=iterator.nextRight;
+		}
+	}		
+}
+Field.prototype.clearLeft = function(){
+	var i,
+	iterator;
+	for ( i=0; i < RAWS; i++) {
+		iterator=this.cells[i][RIGHT_EDGE];
+		while(iterator.nextLeft){
+			if ( iterator.nextLeft.value === 0){
+				iterator.nextLeft.value=iterator.value;	
+				iterator.value=0; 
+				iterator=iterator=this.cells[i][RIGHT_EDGE];//плохая реализация :(
+							
+			}
+			iterator=iterator.nextLeft;
+		}
+	}		
+}
+f.cells[0][3].value=2;
+f.cells[0][0].value=0;
