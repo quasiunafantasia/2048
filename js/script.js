@@ -122,7 +122,7 @@ Field.prototype.moveLeft=function (){
 		}
 	}		
 }
-Field.prototype.clearLeft = function(){
+Field.prototype.clearLeft = function() /*clears 0 after moveLeft, starts from the Right side >.< */{
 	var i,
 	iterator;
 	for ( i=0; i < RAWS; i++) {
