@@ -115,9 +115,9 @@ Field.prototype.moveLeft=function (){
 		iterator=this.cells[i][LEFT_EDGE];
 		while(iterator.nextRight){
 			if ( iterator.value === iterator.nextRight.value){
-				iterator.value*=2;
-				iterator.nextRight.value=0;				
-			}
+				iterator.value*=2;		//здесь надо было "пробрасывать" ссылку мимо ненужного 
+				iterator.nextRight.value=0;	//элемента, удалять его и создавать новый, но я испугался			
+			}					//тк  javascript
 			iterator=iterator.nextRight;
 		}
 	}		
@@ -131,7 +131,7 @@ Field.prototype.clearLeft = function() /*clears 0 after moveLeft, starts from th
 			if ( iterator.nextLeft.value === 0){
 				iterator.nextLeft.value=iterator.value;	
 				iterator.value=0; 
-				iterator=iterator=this.cells[i][RIGHT_EDGE];//плохая реализация :(
+				iterator=iterator=this.cells[i][RIGHT_EDGE];//inconvinient :(
 							
 			}
 			iterator=iterator.nextLeft;
