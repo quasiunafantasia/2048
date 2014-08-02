@@ -27,7 +27,7 @@ var FieldModule = (function(){
 			str="";
 			for (var j =0; j<RAWS; j++)
 				str+=this.cells[i][j]+" ";
-			console.log(str);
+			//console.log(str);
 		}
 	}
 	Field.prototype.directions = {

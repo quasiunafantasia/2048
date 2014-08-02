@@ -8,12 +8,19 @@ window.onload = function () {
 	field.generate();
 	field.generate();
 	field.print();
-	if ($.detectSwipe.enabled) 
-		$(".body").on('swipeleft', field.step(left))
-				  .on('swiperight',field.step(right))
-				  .on('swipeup',    field.step(up))
-				  .on('swipedown',  field.step(down));
-	else {	
+	$(function(){
+		$( "body" ).on( "swiperight", function(){field.step(right)} );
+	});
+	$(function(){
+		$( "body" ).on( "swipeleft", function(){field.step(left)} );
+	});
+	$(function(){
+		$( "body" ).on( "swipedown", function(){field.step(down)} );
+	});
+	$(function(){
+		$( "body" ).on( "swipeup", function(){field.step(up)} );
+	});
+  
 		document.onkeydown = function(event){
 		var events = event || window.event;
 
@@ -26,6 +33,6 @@ window.onload = function () {
 			if (events.keyCode == 40) 
 				field.step(down);
 		}
-	}
+	
 
 }

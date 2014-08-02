@@ -2,16 +2,16 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"> </script>
-<script type="text/javascript" src="js/device.min.js"> </script>
-<script type="text/javascript" src="js/jquery.detect_swipe.js"> </script>
-<script type="text/javascript" src="js/jquery.touchwipe.min.js"> </script>
+<script type="text/javascript" src="js/swipe.js"> </script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.3.min.js"> </script>
 <script type="text/javascript" src="js/Field2.js"> </script>
 <script type="text/javascript" src="js/script.js"> </script>
 
 
 </head>
-<body>
+<body width = 100%>
 	<div id="scoreBar"></div>
 	<ul class="game">
 		<li class="cell" id = "0"></li>
@@ -31,9 +31,5 @@
 		<li class="cell" id = "14"></li>	
 		<li class="cell" id = "15"></li>	
 	</ul>
-	<button onclick="field.step(left);">left</button>
-	<button onclick="field.step(right);">right</button>
-	<button onclick="field.step(up);">up</button>
-	<button onclick="field.step(down);">down</button>
-</body>
+	</body>
 </html>

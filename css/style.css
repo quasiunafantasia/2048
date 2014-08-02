@@ -3,31 +3,36 @@
 	padding: 0;
 }
 #scoreBar{
+
 	width:200px;
-	height:40px;
-	float:right;
+	height:60px;
+	margin:auto;
+	margin-top: 40px;
 	background-color: lightblue;
 }
 .game {
 	margin:auto;
-	width:208px;
-	height: 208px;
+	  
+	margin-top: 20px;
+	width:512px;
+	height: 512px;
 	display: block;
 	background-color:red;
 	list-style: none;
 }
 .cell{
-	margin:1px;
-	display: block;
-	border: 1px;
-	border-color: black;
-	width: 50px;
-	height: 50px;
+	margin:4px;
+	vertical-align: middle;
+  	display: table-cell;
+	width: 120px;
+	height: 120px;
 	float:left;
-	background-color: yellow;	
+	line-height: 120px;
+	background-color: darkred;	
 	vertical-align: middle;
 	text-align: center;
 	font-size: 45px;
+	color: cyan;
 
 
 }
