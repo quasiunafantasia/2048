@@ -1,4 +1,8 @@
 "use strict";
+function roll (x) /* P(true) = 1/x */{
+	var rez = Math.floor(Math.random()*(x-1));
+	return rez === 0;
+}
 var COLLS = 4, 
 RAWS = 4,
 LEFT_EDGE=0,
@@ -18,17 +22,19 @@ Array.prototype.create = function (n,val) {
 	return rez;
 }
 function Field(){
-	//this.cells=Array.prototype.create(COLLS,eval("new Array(RAWS)"));
-	//for(var i=0, j=0;i<COLLS, j<RAWS;this.cells[i++][j++]=new Cell(i+j));
+//	for(var i=0, j=0;i<COLLS, j<RAWS;this.cells[i++][j++]=0);
 	var i,j;
 	this.cells=[];
 		for (i = 0; i< RAWS; i++)
 			this.cells[i]=[];
 		for(var i = 0; i<COLLS;i++)
 			for(var j = 0; j<RAWS;j++)
-				this.cells[i][j]=((i*RAWS)+j);
+				this.cells[i][j]=0;
+
 }
-Field.prototype.setLinks = function() /* sets navigation links for cells like in a linked list */{
+/*
+Field.prototype.setLinks = function() {
+//sets navigation links for cells like in a linked list 
 	//right
 	for(var i = 0; i<RAWS;i++){
 		for(var j = 0;j<COLLS-1;j++)
@@ -55,6 +61,7 @@ Field.prototype.setLinks = function() /* sets navigation links for cells like in
 	}
 		
 }
+*/
 var field = [4];
 var f = new Field();
 Field.prototype.search=function(cell){
@@ -108,53 +115,35 @@ var up = 'up',
 	down = 'down',
 	left = 'left',
 	right = 'right';
-Field.prototype.moveLeft=function (){
-	var i,
-	iterator;
-	for ( i=0; i < RAWS; i++) {
-		iterator=this.cells[i][LEFT_EDGE];
-		while(iterator.nextRight){
-			if ( iterator.value === iterator.nextRight.value){
-				iterator.value*=2;		//здесь надо было "пробрасывать" ссылку мимо ненужного 
-				iterator.nextRight.value=0;	//элемента, удалять его и создавать новый, но я испугался			
-			}					//тк  javascript
-			iterator=iterator.nextRight;
-		}
-	}		
-}
-Field.prototype.clear = function(direction) /*clears 0 after moveLeft, starts from the Right side >.< */{
-	var i,
-	iterator;
+Field.prototype.clear = function(direction) {
+	var i,j,k;
 	var descriptor=this.directions[direction];
 	var next = descriptor.next;
 	var prev = descriptor.prev;
 	if (descriptor.orientation === "horizontal"){
-		for ( i=0; i < RAWS; i++) {
-			iterator=this.cells[i][descriptor.end];
-			while(iterator[prev]){
-				if ( iterator[prev].value === 0){
-					iterator[prev].value=iterator.value;	
-					iterator.value=0; 
-					iterator=this.cells[i][descriptor.end];//inconvinient :(
-								
-				}
-				iterator=iterator[prev];
+		for ( k=0; k < RAWS; k++) {
+			for(i = descriptor.end; i != descriptor.start ; i += prev){
+				for( j =  descriptor.end; j != descriptor.start ; j += prev)
+					if(this.cells[k][j + prev] === 0){
+						this.cells[k][j + prev]=this.cells[k][j];
+						this.cells[k][j]=0;
+					}
+					
+			
 			}
-		}		
+		}
 	}
 	if (descriptor.orientation === "vertical"){
-		for ( i=0; i < COLLS; i++) {
-			iterator=this.cells[descriptor.end][i];
-			while(iterator[prev]){
-				if ( iterator[prev].value === 0){
-					iterator[prev].value=iterator.value;	
-					iterator.value=0; 
-					iterator=this.cells[descriptor.end][i];//inconvinient :(
-								
-				}
-				iterator=iterator[prev];
+			for ( k=0; k < RAWS; k++) {
+				for(i = descriptor.end; i != descriptor.start ; i += prev){
+				for( j =  descriptor.end; j != descriptor.start ; j += prev)
+					if(this.cells[j + prev][k] === 0){
+						this.cells[j + prev][k]=this.cells[j][k];
+						this.cells[j][k]=0;
+					}
+				}		
 			}
-		}		
+	
 	}
 }
 /* не пошло
@@ -205,31 +194,79 @@ Field.prototype.move = function (direction){
 */
 Field.prototype.move = function (direction){
 	var i,j;
+	var costili = 0;
 	var descriptor=this.directions[direction];
 	var next = descriptor.next;
 	var prev = descriptor.prev;
 	if (descriptor.orientation === "horizontal"){
-		for ( i=0; i < RAWS; i++) {
-			for(j =descriptor.start;j<descriptor.end; j+=next){
-				if ( this.cells[i][j] === this.cells[i][j+next]){
-					this.cells[i][j] *= 2;
+		for (i = 0; i < RAWS; i++)
+			for (j = descriptor.start ; j != descriptor.end - next; j += next){
+				if (this.cells[i][j + next] === this.cells[i][j]){
+					this.cells[i][j] *=2;
 					this.cells[i][j+next] = 0;
 				}
-				if (this.cells[i][j] === 0){
-					for(var t = j; t < descriptor.end; t+=next){
-						var temp = 0;
-						temp = this.cells[i][t];
-						this.cells[i][t] = this.cells[i][t+next];
-						this.cells[i][t+next] = temp;
-					}
-					this.display();
-					j-=next;
-				}
+				
 			}
-		}
+	}
+	if (descriptor.orientation === "vertical"){
+		for (i = 0; i < COLLS; i++)
+			for (j = descriptor.start ; j != descriptor.end - next; j += next){
+				if (this.cells[j + next][i] === this.cells[j][i]){
+					this.cells[j][i] *=2;
+					this.cells[j+next][i] = 0;
+				}
+				
+			}
 	}
 }
-f.cells[0][3]=2;
-f.cells[0][0]=1;
-f.cells[1][0]=2;
-f.cells[1][1]=4;
+
+Field.prototype.calcZeros = function () {
+	var i,j,rez;
+	rez = 0;
+	for(i = 0; i < RAWS; i++)
+		for(j = 0; j < COLLS; j++)
+			if (this.cells[i][j] === 0)
+				rez++;
+	return rez;
+}
+Field.prototype.generate = function () /* generates new dice on the empty cell with P(2)=0.9, P(4) = 0.1*/{
+	var i,j,val,range;
+	range = this.calcZeros();
+	if (roll (10))
+		val = 4;
+	
+	else val = 2;
+	for (i = 0; i < RAWS; i++)
+		for (j = 0; j < COLLS; j++)
+			if (this.cells[i][j] === 0) {
+				if (roll (range)){
+				this.cells[i][j] = val;
+				return ;
+				}
+			else range--;
+			}
+}
+Field.prototype.getScore = function () {
+	var sum = 0;
+	var i,j;
+	for (i = 0; i < RAWS; i++)
+		for (j = 0; j < COLLS; j++)
+			sum += this.cells[i][j];
+	return sum;
+}
+Field.prototype.print = function (){
+	var i,j;
+	var cells = document.getElementsByTagName("li");
+	for (i = 0; i < RAWS; i++)
+		for (j = 0; j < COLLS; j++)
+			cells[i*RAWS+j].innerHTML=this.cells[i][j];
+
+
+}
+Field.prototype.step = function (direction) {
+	this.clear(direction);
+	this.move(direction);
+	this.clear(direction);
+	this.generate();
+	this.print();
+}

@@ -1,0 +1,23 @@
+*{
+	
+	padding: 0;
+}
+.game {
+	margin:auto;
+	width:208px;
+	height: 208px;
+	display: block;
+	background-color:red;
+	list-style: none;
+}
+.cell{
+	margin:1px;
+	display: block;
+	border: 1px;
+	border-color: black;
+	width: 50px;
+	height: 50px;
+	float:left;
+	background-color: yellow;	
+
+}
