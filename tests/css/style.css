@@ -2,12 +2,6 @@
 	
 	padding: 0;
 }
-#scoreBar{
-	width:200px;
-	height:40px;
-	float:right;
-	background-color: lightblue;
-}
 .game {
 	margin:auto;
 	width:208px;

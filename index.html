@@ -2,10 +2,17 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"> </script>
+<script type="text/javascript" src="js/device.min.js"> </script>
+<script type="text/javascript" src="js/jquery.detect_swipe.js"> </script>
+<script type="text/javascript" src="js/jquery.touchwipe.min.js"> </script>
+<script type="text/javascript" src="js/Field2.js"> </script>
 <script type="text/javascript" src="js/script.js"> </script>
 
+
 </head>
-<body onload="f.display()">
+<body>
+	<div id="scoreBar"></div>
 	<ul class="game">
 		<li class="cell" id = "0"></li>
 		<li class="cell" id = "1"></li>	
@@ -24,9 +31,9 @@
 		<li class="cell" id = "14"></li>	
 		<li class="cell" id = "15"></li>	
 	</ul>
-	<button onclick=f.step(left)>left</button>
-	<button onclick=f.step(right)>right</button>
-	<button onclick=f.step(up)>up</button>
-	<button onclick=f.step(down)>down</button>
+	<button onclick="field.step(left);">left</button>
+	<button onclick="field.step(right);">right</button>
+	<button onclick="field.step(up);">up</button>
+	<button onclick="field.step(down);">down</button>
 </body>
 </html>
