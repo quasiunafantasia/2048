@@ -200,7 +200,7 @@ Field.prototype.move = function (direction){
 	var prev = descriptor.prev;
 	if (descriptor.orientation === "horizontal"){
 		for (i = 0; i < RAWS; i++)
-			for (j = descriptor.start ; j != descriptor.end - next; j += next){
+			for (j = descriptor.start ; j != descriptor.end; j += next){
 				if (this.cells[i][j + next] === this.cells[i][j]){
 					this.cells[i][j] *=2;
 					this.cells[i][j+next] = 0;
@@ -210,7 +210,7 @@ Field.prototype.move = function (direction){
 	}
 	if (descriptor.orientation === "vertical"){
 		for (i = 0; i < COLLS; i++)
-			for (j = descriptor.start ; j != descriptor.end - next; j += next){
+			for (j = descriptor.start ; j != descriptor.end; j += next){
 				if (this.cells[j + next][i] === this.cells[j][i]){
 					this.cells[j][i] *=2;
 					this.cells[j+next][i] = 0;
@@ -270,3 +270,18 @@ Field.prototype.step = function (direction) {
 	this.generate();
 	this.print();
 }
+document.onkeydown = function(event){
+	var events = event || window.event;
+
+		if (events.keyCode == 37) 
+			f.step(left);
+		if (events.keyCode == 39) 
+			f.step(right);
+		if (events.keyCode == 38) 
+			f.step(up);
+		if (events.keyCode == 40) 
+			f.step(down);
+}
+
+
+

@@ -19,5 +19,9 @@
 	height: 50px;
 	float:left;
 	background-color: yellow;	
+	vertical-align: middle;
+	text-align: center;
+	font-size: 45px;
+
 
 }
