@@ -2,6 +2,7 @@ var up = 'up',
 	down = 'down',
 	left = 'left',
 	right = 'right';
+
 window.onload = function () {
 	var field = new FieldModule.Field();	
 	field.generate();
@@ -36,18 +37,41 @@ window.onload = function () {
 	//alert("last scroll top " + lastScrollTop);
 	//alert("down " + st2);
 	});*/
-	fucntion gameIsOver();
-	$(function(){
-		$( "body" ).on( "swiperight", function(){field.step(right)} );
+	
+		$( "body" ).on( "swiperight", function(){field.step(right);
+			if (field.gameOver())
+				if (confirm("Good job! Your score is " + field.getScore() +"\n Do you want to start a new game?")){
+					field = new FieldModule.Field();					
+					field.generate();
+					field.generate();
+					field.print();} 
 	});
-	$(function(){
-		$( "body" ).on( "swipeleft", function(){field.step(left)} );
+	
+		$( "body" ).on( "swipeleft", function(){field.step(left);
+			if (field.gameOver())
+				if (confirm("Good job! Your score is " + field.getScore() +"\n Do you want to start a new game?")){
+					field = new FieldModule.Field();					
+					field.generate();
+					field.generate();
+					field.print();} 
 	});
-	$(function(){
-		$( "body" ).on( "swipedown", function(){field.step(down)} );
+	
+		$( "body" ).on( "swipedown", function(){field.step(down);
+			if (field.gameOver())
+				if (confirm("Good job! Your score is " + field.getScore() +"\n Do you want to start a new game?")){
+					field = new FieldModule.Field();					
+					field.generate();
+					field.generate();
+					field.print();}
 	});
-	$(function(){
-		$( "body" ).on( "swipeup", function(){field.step(up)} );
+	
+		$( "body" ).on( "swipeup", function(){field.step(up);
+			if (field.gameOver())
+				if (confirm("Good job! Your score is " + field.getScore() +"\n Do you want to start a new game?")){
+					field = new FieldModule.Field();					
+					field.generate();
+					field.generate();
+					field.print();} 
 	});
 	document.onkeydown = function(event){
 	var events = event || window.event;
