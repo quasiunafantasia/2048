@@ -1,35 +1,26 @@
 *{
-	
 	padding: 0;
 	-webkit-touch-callout: none;
-
--webkit-user-select: none;
-
--khtml-user-select: none;
-
--moz-user-select: none;
-unselectable : on;
--ms-user-select: none;
-
-user-select: none;
-
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	unselectable : on;
+	-ms-user-select: none;
+	user-select: none;
 }
 #scoreBar{
-
 	width:200px;
 	line-height: 60px;
 	vertical-align: middle;
 	text-align: center;
-	font-size: 45px;
+	font-size: 25px;
 	height:60px;
 	margin:auto;
 	margin-top: 40px;
 	background-color: lightblue;
 }
 .game {
-
 	margin:auto;
-	  
 	margin-top: 20px;
 	width:332px;
 	height: 332px;
@@ -50,6 +41,4 @@ user-select: none;
 	text-align: center;
 	font-size: 45px;
 	color: cyan;
-
-
 }
