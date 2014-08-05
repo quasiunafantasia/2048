@@ -22,23 +22,15 @@
 .game {
 	margin:auto;
 	margin-top: 20px;
-	width:332px;
-	height: 332px;
 	display: block;
 	background-color:red;
 	list-style: none;
 }
 .cell{
-	margin:4px;
 	vertical-align: middle;
   	display: table-cell;
-	width: 75px;
-	height: 75px;
 	float:left;
-	line-height: 75px;
 	background-color: darkred;	
-	vertical-align: middle;
 	text-align: center;
-	font-size: 45px;
 	color: cyan;
 }
