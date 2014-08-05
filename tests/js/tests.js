@@ -8,7 +8,7 @@ QUnit.test( "constructor  test", function( assert ) {
 //--------------------simple move test-----------------------------------------
 QUnit.test( "simple move test", function( assert ) {
 	var instance = new FieldModule.Field();
-	instance.cells = [[2,0,0,0],[0,2,0,0],[2,0,2,0],[2,2,0,0]];
+	instance.cells = "aaaa";//[[2,0,0,0],[0,2,0,0],[2,0,2,0],[2,2,0,0]];
 	instance.clear("right");
 	assert.deepEqual( instance.cells, [[0,0,0,2],[0,0,0,2],[0,0,2,2],[0,0,2,2]], "Field.clear() is ok" );
 	instance.cells = [[2,0,0,0],[2,2,2,2],[2,0,0,2],[0,0,2,2]];

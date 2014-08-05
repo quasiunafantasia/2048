@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *{
 	padding: 0;
 	-webkit-touch-callout: none;
@@ -8,7 +9,11 @@
 	-ms-user-select: none;
 	user-select: none;
 }
-#scoreBar{
+.gameContainer{
+	position:relative;
+	float:top;
+}
+.scoreBar{
 	width:200px;
 	line-height: 60px;
 	vertical-align: middle;
