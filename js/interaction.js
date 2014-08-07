@@ -61,7 +61,7 @@ var InteractionModule = (function () {
 				checkGameEnd(field);
 				break;
 			case 38:
-				field.step(right);
+				field.step(up);
 				checkGameEnd(field);
 				break;
 			case 39:
